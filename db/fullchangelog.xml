@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Martin (generated)" id="1447785453818-1">
+        <createSequence sequenceName="article_id_sequence"/>
+    </changeSet>
+    <changeSet author="Martin (generated)" id="1447785453818-2">
+        <createSequence sequenceName="author_id_sequence"/>
+    </changeSet>
+    <changeSet author="Martin (generated)" id="1447785453818-3">
+        <createTable tableName="article">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Martin (generated)" id="1447785453818-4">
+        <createTable tableName="author">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firstname" type="VARCHAR(255)"/>
+            <column name="lastname" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Martin (generated)" id="1447785453818-5">
+        <createTable tableName="author_has_article">
+            <column name="author_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="article_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Martin (generated)" id="1447785453818-6">
+        <addPrimaryKey columnNames="id" constraintName="article_pkey" tableName="article"/>
+    </changeSet>
+    <changeSet author="Martin (generated)" id="1447785453818-7">
+        <addPrimaryKey columnNames="author_id, article_id" constraintName="author_has_article_pkey" tableName="author_has_article"/>
+    </changeSet>
+    <changeSet author="Martin (generated)" id="1447785453818-8">
+        <addPrimaryKey columnNames="id" constraintName="author_pkey" tableName="author"/>
+    </changeSet>
+    <changeSet author="Martin (generated)" id="1447785453818-9">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="author_has_article" constraintName="fk_4u1xu9f3offl0h8ehsrcbtv32" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="author"/>
+    </changeSet>
+    <changeSet author="Martin (generated)" id="1447785453818-10">
+        <addForeignKeyConstraint baseColumnNames="article_id" baseTableName="author_has_article" constraintName="fk_5ce1t1mg4d49lnwswlwtaqits" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="article"/>
+    </changeSet>
+</databaseChangeLog>

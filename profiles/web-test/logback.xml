@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>%-5p %d{yyyy-MM-dd HH:mm:ss} %C{0}:%M at line %L - %m%n</Pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>c:/Temp/test-db-versioning/test-log/test-db-versioning.log</file>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>%-5p %d{yyyy-MM-dd HH:mm:ss} %C{0}:%M at line %L - %m%n</Pattern>
+    </encoder>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- rollover daily, use zip compress, max. log files 150 -->
+      <fileNamePattern>c:/Temp/test-db-versioning/test-log/test-db-versioning-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+      <maxHistory>150</maxHistory>
+      <timeBasedFileNamingAndTriggeringPolicy
+              class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <!-- or whenever the file size reaches 20MB -->
+        <maxFileSize>20MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+  </appender>
+
+  <!--   <logger name="org.hibernate.internal.SessionImpl" level="TRACE" /> -->
+  <!--   <logger name="org.hibernate.event.internal.AbstractFlushingEventListener" level="TRACE" /> -->
+  <!--   <logger name="org.hibernate" level="DEBUG" /> -->
+  <logger name="com.app" level="INFO" />
+  <logger name="org.hibernate.hql.internal.ast.QueryTranslatorImpl" level="ERROR" />
+  <!--   <logger name="org.hibernate.engine.jdbc.spi.SqlExceptionHelper" level="ERROR" /> -->
+  <!--   <logger name="org.springframework.transaction.support.AbstractPlatformTransactionManager" level="DEBUG" /> -->
+  <!--   <logger name="org.springframework.orm.hibernate4.HibernateTransactionManager" level="DEBUG" /> -->
+
+  <root level="INFO">
+    <appender-ref ref="FILE" />
+    <appender-ref ref="STDOUT" />
+  </root>
+
+</configuration>
